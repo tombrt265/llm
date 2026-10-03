@@ -16,17 +16,54 @@ $ llm [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
-* `scrape`: Scrapes a URL and returns the content.
+* `scrape`: Scraping different parts of the web.
 * `docs`: Documentation for this CLI.
 
 ## `llm scrape`
 
-Scrapes a URL and returns the content.
+Scraping different parts of the web.
 
 **Usage**:
 
 ```console
-$ llm scrape [OPTIONS] {url}
+$ llm scrape [OPTIONS] COMMAND [ARGS]...
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+**Commands**:
+
+* `wikipedia`: Scrapes a wikipedia.org/wiki/ sub-url and...
+* `pdf`: Parses a pdf file from the web and returns...
+
+### `llm scrape wikipedia`
+
+Scrapes a wikipedia.org/wiki/ sub-url and returns the parsed content.
+
+**Usage**:
+
+```console
+$ llm scrape wikipedia [OPTIONS] {url}
+```
+
+**Arguments**:
+
+* `url`: [required]
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+### `llm scrape pdf`
+
+Parses a pdf file from the web and returns its content.
+
+**Usage**:
+
+```console
+$ llm scrape pdf [OPTIONS] {url}
 ```
 
 **Arguments**:

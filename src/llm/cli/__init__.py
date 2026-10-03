@@ -1,7 +1,7 @@
 import typer 
 
 from llm.cli import docs
-from llm.cli.scrape import scrape
+from llm.cli import scrape
 
 
 app = typer.Typer(
@@ -9,6 +9,7 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
-app.command()(scrape)
+# app.command()(scrape)
 
+app.add_typer(scrape.app, name="scrape")
 app.add_typer(docs.app, name="docs")
