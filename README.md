@@ -12,4 +12,4 @@ uv sync
 
 ## Usage
 
-_see COMMANDS.md_
+_see [COMMANDS.md](https://github.com/tombrt265/llm/blob/main/COMMANDS.md)_
