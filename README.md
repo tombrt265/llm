@@ -12,4 +12,6 @@ uv sync
 
 ## Usage
 
+```
 uv run main.py --help
+```
