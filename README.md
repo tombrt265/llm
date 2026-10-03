@@ -12,6 +12,4 @@ uv sync
 
 ## Usage
 
-```
-uv run main.py --help
-```
+_see COMMANDS.md_
