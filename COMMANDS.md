@@ -18,6 +18,7 @@ $ llm [OPTIONS] COMMAND [ARGS]...
 
 * `scrape`: Scraping different parts of the web.
 * `docs`: Documentation for this CLI.
+* `tokenize`: Tokenize a string of text.
 
 ## `llm scrape`
 
@@ -117,6 +118,42 @@ Show the docs rendered in the terminal.
 ```console
 $ llm docs show [OPTIONS]
 ```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `llm tokenize`
+
+Tokenize a string of text.
+
+**Usage**:
+
+```console
+$ llm tokenize [OPTIONS] COMMAND [ARGS]...
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+**Commands**:
+
+* `main`: Tokenizes a string based on a...
+
+### `llm tokenize main`
+
+Tokenizes a string based on a token-merge-strategy.
+
+**Usage**:
+
+```console
+$ llm tokenize main [OPTIONS] {text}
+```
+
+**Arguments**:
+
+* `text`: [required]
 
 **Options**:
 
