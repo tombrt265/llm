@@ -1,35 +1,43 @@
-import json
 import typer
 
 from llm.data.scrape import scrape_wikipedia, scrape_pdf
-from llm.data.tokenize import normalize, pre_tokenize, generate_token_set 
+from llm.data.tokenize import normalize, pre_tokenize
+from llm.data.dataset import is_scraped, save_page
 
 app = typer.Typer(help="Scraping different parts of the web.", no_args_is_help=True)
 
 
-@app.command()
-def wikipedia(url):
-    "Scrapes a wikipedia.org/wiki/ sub-url and returns the parsed content."
-    
-    content: str = scrape_wikipedia(url)
-    typer.echo(content)
-
-
-@app.command()
-def pdf(url):
-    "Parses a pdf file from the web and returns its content."
-    typer.echo("Scraping pdf content ...")
-    content: str = scrape_pdf(url)
-
+def _scrape_and_store(url: str, source: str, content: str) -> None:
+    "Normalize, pre-tokenize and persist a scraped page as a token list."
     typer.echo("Normalizing content ...")
     normalized_content: list[str] = normalize(content.split("\n"))
-    words: list[str] = pre_tokenize(normalized_content)
-    
-    typer.echo("Generating token set ...")
-    tokens, merges = generate_token_set(words)
-    typer.echo(tokens)
+    tokens: list[str] = pre_tokenize(normalized_content)
 
-    typer.echo("Write merges to merges.json ...")
-    with open("merges.json", "w", encoding="utf-8") as f:
-        json.dump([[k[0], k[1], v] for k, v in merges.items()], f, ensure_ascii=False, indent=2)
+    typer.echo("Storing tokens ...")
+    page_path = save_page(url, source, tokens)
+    typer.echo(f"Saved {len(tokens)} tokens to {page_path}")
     typer.echo("Done!")
+
+
+@app.command()
+def wikipedia(url: str):
+    "Scrapes a wikipedia.org/wiki/ sub-url and stores the parsed content."
+    if is_scraped(url):
+        typer.echo(f"URL already scraped, skipping: {url}")
+        raise typer.Exit()
+
+    typer.echo("Scraping wikipedia content ...")
+    content: str = scrape_wikipedia(url)
+    _scrape_and_store(url, "wikipedia", content)
+
+
+@app.command()
+def pdf(url: str):
+    "Parses a pdf file from the web and stores its content."
+    if is_scraped(url):
+        typer.echo(f"URL already scraped, skipping: {url}")
+        raise typer.Exit()
+
+    typer.echo("Scraping pdf content ...")
+    content: str = scrape_pdf(url)
+    _scrape_and_store(url, "pdf", content)

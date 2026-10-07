@@ -18,7 +18,8 @@ $ llm [OPTIONS] COMMAND [ARGS]...
 
 * `scrape`: Scraping different parts of the web.
 * `docs`: Documentation for this CLI.
-* `tokenize`: Tokenize a string of text.
+* `test`: Commands for testing parts of the pipeline.
+* `generate-tokens`: Generate a token set from the stored dataset.
 
 ## `llm scrape`
 
@@ -37,11 +38,11 @@ $ llm scrape [OPTIONS] COMMAND [ARGS]...
 **Commands**:
 
 * `wikipedia`: Scrapes a wikipedia.org/wiki/ sub-url and...
-* `pdf`: Parses a pdf file from the web and returns...
+* `pdf`: Parses a pdf file from the web and stores...
 
 ### `llm scrape wikipedia`
 
-Scrapes a wikipedia.org/wiki/ sub-url and returns the parsed content.
+Scrapes a wikipedia.org/wiki/ sub-url and stores the parsed content.
 
 **Usage**:
 
@@ -59,7 +60,7 @@ $ llm scrape wikipedia [OPTIONS] {url}
 
 ### `llm scrape pdf`
 
-Parses a pdf file from the web and returns its content.
+Parses a pdf file from the web and stores its content.
 
 **Usage**:
 
@@ -123,14 +124,14 @@ $ llm docs show [OPTIONS]
 
 * `--help`: Show this message and exit.
 
-## `llm tokenize`
+## `llm test`
 
-Tokenize a string of text.
+Commands for testing parts of the pipeline.
 
 **Usage**:
 
 ```console
-$ llm tokenize [OPTIONS] COMMAND [ARGS]...
+$ llm test [OPTIONS] COMMAND [ARGS]...
 ```
 
 **Options**:
@@ -139,21 +140,35 @@ $ llm tokenize [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
-* `main`: Tokenizes a string based on a...
+* `tokenize`: Tokenizes a string based on a...
 
-### `llm tokenize main`
+### `llm test tokenize`
 
 Tokenizes a string based on a token-merge-strategy.
 
 **Usage**:
 
 ```console
-$ llm tokenize main [OPTIONS] {text}
+$ llm test tokenize [OPTIONS] {text}
 ```
 
 **Arguments**:
 
 * `text`: [required]
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `llm generate-tokens`
+
+Generate a token set from the stored dataset.
+
+**Usage**:
+
+```console
+$ llm generate-tokens [OPTIONS] COMMAND [ARGS]...
+```
 
 **Options**:
 
